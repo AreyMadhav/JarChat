@@ -6,7 +6,6 @@ import datetime
 import wikipedia
 import webbrowser
 
-# Define possible user inputs and corresponding chatbot responses
 responses = {
     "hi": ["Hello! How can I assist you today?", "Hi there! What can I do for you?", "Greetings! What can I help you with?"],
     "how are you": ["I'm doing well, thank you for asking! How can I assist you?", "I'm fine, thanks! What can I do for you?", "I'm feeling great today! What can I help you with?"],
@@ -21,23 +20,18 @@ responses = {
     "default": ["I'm sorry, I don't understand.", "Could you please rephrase that?", "I'm not sure what you mean."],
 }
 
-# Define regular expressions to match user input for more advanced queries
 time_regex = re.compile(r"what time is it")
 weather_regex = re.compile(r"what is the weather like")
 capital_regex = re.compile(r"what is the capital of (.*)")
 who_is_regex = re.compile(r"who is (.*)")
 search_regex = re.compile(r"search for (.*)")
 
-# Initialize speech recognition and text-to-speech engines
 recognizer = sr.Recognizer()
 engine = pyttsx3.init()
 
-# Set recognizer to use device index 2
 recognizer.device_index = 2
 
-# Define function to get chatbot response
 def get_response(user_input):
-    # Convert input to lowercase and remove whitespace
     user_input = user_input.lower().strip()
     
     # Check if input matches regular expressions
@@ -46,9 +40,7 @@ def get_response(user_input):
     capital_match = re.match(capital_regex, user_input)
     who_is_match = re.match(who_is_regex, user_input)
     search_match = re.match(search_regex, user_input)
-    
-    # If input matches a regular expression, return the appropriate response
-    
+        
     if time_match:
         # Replace {time} placeholder
         current_time = datetime.datetime.now().strftime("%H:%M")
@@ -71,7 +63,6 @@ def get_response(user_input):
             description = "not found"
         return random.choice(responses["who is"]).format(person=person, description=description)
     elif search_match:
-        # Use text-to-speech to confirm search query and open browser window with Google search
         query = search_match.group(1)
         engine.say(f"Opening Google search for {query}")
         engine.runAndWait()
@@ -79,8 +70,7 @@ def get_response(user_input):
         webbrowser.open(search_url)
         return None
     elif user_input in responses:
-        # If input matches a key in the responses dictionary, return a random response
-        return random.choice(responses[user_input])
+       return random.choice(responses[user_input])
     else:
         return random.choice(responses["default"])
     
@@ -108,6 +98,7 @@ def speak(response):
     engine.runAndWait()
 
 def main():
+
     speak("Hello! I am Jarvis, your personal assistant. How can I assist you today?")
     
     while True:
@@ -115,16 +106,13 @@ def main():
        user_input = get_voice_input()
         
        if user_input:
-            # Get chatbot response based on user input
             response = get_response(user_input)
             
             if response:
-                # Speak chatbot response
                 speak(response)
             
             if "bye" in user_input:
-                # End chatbot interaction
-                speak("Goodbye!")
+                speak("Goodbye! Have a great day!")
                 break
 
 if __name__ == "__main__":
