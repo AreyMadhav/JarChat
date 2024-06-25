@@ -82,17 +82,14 @@ def get_response(user_input):
         # If input matches a key in the responses dictionary, return a random response
         return random.choice(responses[user_input])
     else:
-        # If input does not match any regular expressions or keys in the responses dictionary, return default response
         return random.choice(responses["default"])
-
-# Define function to get voice input from user
+    
 def get_voice_input():
     # Use microphone to record user input
     with sr.Microphone(device_index=recognizer.device_index) as source:
         print("Say something!")
         audio = recognizer.listen(source)
     
-    # Use speech recognition to convert audio to text
     try:
         user_input = recognizer.recognize_google(audio)
         print(f"You said: {user_input}")
@@ -105,23 +102,19 @@ def get_voice_input():
     
     return user_input
 
-# Define function to speak chatbot response
 def speak(response):
-    # Use text-to-speech engine to speak response
+
     engine.say(response)
     engine.runAndWait()
 
-# Define main function to handle chatbot interactions
 def main():
-    # Greet user and introduce Jarvis
     speak("Hello! I am Jarvis, your personal assistant. How can I assist you today?")
     
-    # Loop to continue interacting with user until they say "bye"
     while True:
-        # Get voice input from user
-        user_input = get_voice_input()
+
+       user_input = get_voice_input()
         
-        if user_input:
+       if user_input:
             # Get chatbot response based on user input
             response = get_response(user_input)
             
