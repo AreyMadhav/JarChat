@@ -18,7 +18,7 @@ responses = {
     "who is": ["I'm not sure, would you like me to search for information about {person}?", "I think {person} might be {description}. Would you like me to look up more information?", "I'm not familiar with {person}. Would you like me to find more information?"],
     "search for": ["Sure, what would you like me to search for?", "Of course! What do you want me to look up?", "No problem, what should I search for?"],
     "bye": ["Goodbye!", "Bye!", "See you later!"],
-    "default": ["I'm sorry, I don't understand.", "Could you please rephrase that?", "I'm not sure what you mean."]
+    "default": ["I'm sorry, I don't understand.", "Could you please rephrase that?", "I'm not sure what you mean."],
 }
 
 # Define regular expressions to match user input for more advanced queries
