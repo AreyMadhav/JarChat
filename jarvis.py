@@ -4,6 +4,7 @@ import speech_recognition as sr
 import pyttsx3
 import datetime
 import wikipedia
+import webbrowser
 
 # Define possible user inputs and corresponding chatbot responses
 responses = {
@@ -30,6 +31,9 @@ search_regex = re.compile(r"search for (.*)")
 # Initialize speech recognition and text-to-speech engines
 recognizer = sr.Recognizer()
 engine = pyttsx3.init()
+
+# Set recognizer to use device index 2
+recognizer.device_index = 2
 
 # Define function to get chatbot response
 def get_response(user_input):
@@ -84,7 +88,7 @@ def get_response(user_input):
 # Define function to get voice input from user
 def get_voice_input():
     # Use microphone to record user input
-    with sr.Microphone() as source:
+    with sr.Microphone(device_index=recognizer.device_index) as source:
         print("Say something!")
         audio = recognizer.listen(source)
     
